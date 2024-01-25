@@ -20,4 +20,10 @@ Route::get('/addCat', function () {
     return view('addCat');
 });
 
+Route::get('/getCat/{cat}', [CatController::class, 'getCat']);
+
+Route::put('/editCat/{cat}', [CatController::class, 'editCat']);
+
 Route::post('/postCat', [CatController::class, 'postCat']);
+
+Route::delete('/deleteCat/{cat}', [CatController::class, 'deleteCat']);
