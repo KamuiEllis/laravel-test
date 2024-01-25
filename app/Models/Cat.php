@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Cat extends Model
 {
 
+    use Searchable;
     use HasFactory;
     
 
@@ -20,4 +22,9 @@ class Cat extends Model
         'breed',
 
     ];
+
+    public function toSearchableArray()
+    {
+        return ['name' => $this->name, 'breed' => $this->breed];
+    }
 }

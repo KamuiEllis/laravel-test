@@ -17,6 +17,16 @@ class CatController extends Controller
         return view("cat", ['cat' => $cat]);
     }
 
+    public function search(Request $request) {
+        $inputs = $request->validate([
+            'text' => ['required'],
+        ]);
+
+        $cat = Cat::search($inputs['text'])->get();
+
+        return view("cats", ['cats' => $cat]);
+    }
+
     public function deleteCat(Cat $cat) {
         $cat->delete();
         return redirect('/')->with('success', 'Cat has been deleted!');
@@ -32,7 +42,7 @@ class CatController extends Controller
         ]);
 
         $cat->update($inputs);
-        return redirect("/cat/".$cat->id)->with('success', 'Cat information has been edited!');
+        return redirect("/getCat/".$cat->id)->with('success', 'Cat information has been edited!');
     }
 
     public function postCat(Request $request) {
